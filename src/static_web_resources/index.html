@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="main.js"></script>
+    <title>WebSocket Example</title>
+    <style>
+        .led {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .led.off {
+            background-color: red;
+        }
+        .led.on {
+            background-color: green;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th,
+        td {
+            border: 1px solid #ddd;
+            border: none;
+            padding: 8px;
+            text-align: left;
+            width: 50%;
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        th {
+            background-color: #FFF;
+            color: #ddd;
+        }
+        td {
+            background-color: #fff;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #e60000;
+        }
+        p {
+            font-size: 14px;
+            color: #555;
+        }
+        .password {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .pwItems {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+<!--
+<div class="password">
+  <label for="userPassword">Password: </label>
+  <input id="userPassword" type="password" required />
+  <input type="submit" value="Submit" onclick="sendPassword(this);"/>
+</div>
+-->
+<div id="pwItems">
+    <table>
+        <caption>
+            OPC-UA Server configuration
+        </caption>
+        <tr>
+            <td>Is enabled</td>
+            <td>
+                <div>
+                    <strong>CAN1</strong><br>
+                    <input type="checkbox" id="isEnabled_CAN_1_0" /><label for="isEnabled_CAN_1_0">1</label><br>
+                    <input type="checkbox" id="isEnabled_CAN_1_1" /><label for="isEnabled_CAN_1_1">2</label><br>
+                    <input type="checkbox" id="isEnabled_CAN_1_2" /><label for="isEnabled_CAN_1_2">3+5</label><br>
+                    <input type="checkbox" id="isEnabled_CAN_1_3" /><label for="isEnabled_CAN_1_3">4+6</label>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <strong>CAN2                            </strong><br>
+                    <input type="checkbox" id="isEnabled_CAN_2_0" /><label for="isEnabled_CAN_2_0">1</label><br>
+                    <input type="checkbox" id="isEnabled_CAN_2_1" /><label for="isEnabled_CAN_2_1">2</label><br>
+                    <input type="checkbox" id="isEnabled_CAN_2_2" /><label for="isEnabled_CAN_2_2">3+5</label><br>
+                    <input type="checkbox" id="isEnabled_CAN_2_3" /><label for="isEnabled_CAN_2_3">4+6</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>DHCP</td>
+            <th colspan="2"><input type="checkbox" id="DHCP" onclick='handleClick(this);'/></th>
+        </tr>
+        <tr>
+            <td>IP4-Address</td>
+            <th colspan="2"><input type="text" value="192.0.2.1" id="IP4Address" pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b" title="Enter a valid IPv4 address"/></th>
+        </tr>
+        <tr>
+            <td>Netmask</td>
+            <th colspan="2"><input type="text" value="255.255.255.0" id="NetMask"/></th>
+        </tr>
+    </table>
+
+    <button id="sendButton" onclick="sendValues()">Send Values</button>
+    <button onclick="fetchValues()">Fetch Values</button>
+
+    <div>
+        <span class="led off" id="connectionStatus"></span>
+        <span id="connectionText">Disconnected</span>
+    </div>
+    <p>HTML Script to change the configuration files for the OPC-UA Server</p>
+</div>
+</body>
+</html>
