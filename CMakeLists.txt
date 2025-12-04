@@ -36,10 +36,11 @@ add_custom_target(sample_server_cert
 
 option(INCLUDE_HTML_CONTENT "Include the HTML content" ON)
 
-target_sources(app PRIVATE src/main.c 
-src/DHCPClient.c
-#src/vlan.c
-#src/HTTPServer.c
+target_sources(app PRIVATE src/main.c
+        src/InductionConfig.c
+        src/DHCPClient.c
+        #src/vlan.c
+        #src/HTTPServer.c
 )
 
 set(gen_dir ${ZEPHYR_BINARY_DIR}/include/generated/)

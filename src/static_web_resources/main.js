@@ -31,8 +31,11 @@ function handleClick(cb) {
 	}
 }
 
+const wsScheme = window.location.protocol === "https:" ? "wss://" : "ws://";
+const wsUrl    = wsScheme + window.location.host + "/ws_echo";
+const socket = new WebSocket(wsUrl);
 //const socket = new WebSocket("ws://192.0.2.1/");
-const socket = new WebSocket("ws://127.0.0.1/ws_echo");
+//const socket = new WebSocket("ws://127.0.0.1/ws_echo");
 
 socket.onopen = function (event) {
 	updateConnectionStatus(true);
