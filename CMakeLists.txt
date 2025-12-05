@@ -39,6 +39,8 @@ option(INCLUDE_HTML_CONTENT "Include the HTML content" ON)
 target_sources(app PRIVATE src/main.c
         src/InductionConfig.c
         src/DHCPClient.c
+        src/HTTPWebsocket.c
+        src/Flash.c
         #src/vlan.c
         #src/HTTPServer.c
 )

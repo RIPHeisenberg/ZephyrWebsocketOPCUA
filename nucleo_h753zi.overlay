@@ -1,0 +1,29 @@
+
+/ {
+	/* Make sure code-partition still points to your app partition */
+	chosen {
+		zephyr,code-partition = &slot0_partition;
+	};
+};
+
+/* Internal flash controller */
+&flash0 {
+	/* Add or extend partitions node */
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		/* This is usually already there; keep whatever your board uses */
+		slot0_partition: partition@0 {
+			label = "slot0";
+			reg = <0x00000000 0x001E0000>; /* example: 1.875 MB for app */
+		};
+
+		/* New NVS / settings area at the end of flash */
+		storage_partition: partition@1e0000 {
+			label = "storage";
+			reg = <0x001e0000 0x00020000>; /* 128 KB (one sector) */
+		};
+	};
+};

@@ -21,7 +21,7 @@
 #include "InductionConfig.h"
 
 
-LOG_MODULE_DECLARE(net_http_server_sample, LOG_LEVEL_DBG);
+LOG_MODULE_DECLARE(httpwebsocket, LOG_LEVEL_DBG);
 
 
 #if defined(CONFIG_NET_SOCKETS_SOCKOPT_TLS) || defined(CONFIG_COVERAGE_GCOV)
